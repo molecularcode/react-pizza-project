@@ -1,0 +1,73 @@
+$colPrimary: #EB9532;
+$colPd: darken( $colPrimary, 20% );
+$colPl: lighten( $colPrimary, 20% );
+$pad: 15px;
+
+@import 'reset';
+
+/* Global --------------------------------------------------------------- */
+header, main, footer {
+  padding: $pad;
+}
+header {
+  background: url("/src/images/logo.png") left center no-repeat, $colPrimary;
+}
+footer {
+  background-color: $colPrimary;
+}
+a {
+  text-decoration: none;
+  color: $colPl;
+}
+a:hover {
+  color: $colPd;
+}
+.pageTitle {
+  text-align:center;
+}
+a.btn {
+  background-color: $colPrimary;
+  padding: $pad ($pad * 2);
+  color: #fff;
+}
+a.btn:hover {
+  background-color: $colPd;
+}
+.alignCenter {
+  display: inline-block;
+  margin: 0 auto;
+}
+
+/* Navigation --------------------------------------------------------------- */
+nav {
+  ul {
+    text-align: center;
+  }
+  li {
+    display: inline-block;
+    padding: $pad;
+  }
+  a {
+    background-color: $colPl;
+    color: $colPd;
+    padding: $pad ($pad * 2);
+  }
+  a:hover {
+    background-color: $colPd;
+    color: $colPl;
+  }
+}
+
+/* Homepage ----------------------------------------------------------------- */
+.homePage {
+  text-align:center;
+  background: url("/src/images/pizza.jpeg") no-repeat center center fixed;
+}
+
+/* Footer ------------------------------------------------------------------- */
+footer {
+  p {
+    color: #fff;
+    text-align:center;
+  }
+}
