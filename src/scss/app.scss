@@ -1,16 +1,28 @@
-$colPrimary: #EB9532;
+$colText: #2E2E2E;
+$colPrimary: #F39C12;
 $colPd: darken( $colPrimary, 20% );
 $colPl: lighten( $colPrimary, 20% );
+$colPvl: lighten( $colPrimary, 25% );
 $pad: 15px;
+$colError: #B40404;
+$colEd: darken( $colError, 20% );
+$colEl: lighten( $colError, 20% );
 
 @import 'reset';
 
 /* Global --------------------------------------------------------------- */
-header, main, footer {
+body {
+  color: $colText;
+}
+header, footer {
   padding: $pad;
 }
+main, .homePage {
+  height: calc(100vh - 190px);
+}
 header {
-  background: url("/src/images/logo.png") left center no-repeat, $colPrimary;
+  background: url("/images/logo.png") left center no-repeat, $colPrimary;
+  background-size: contain;
 }
 footer {
   background-color: $colPrimary;
@@ -25,17 +37,35 @@ a:hover {
 .pageTitle {
   text-align:center;
 }
-a.btn {
+a.btn, button {
   background-color: $colPrimary;
+  border:none;
   padding: $pad ($pad * 2);
   color: #fff;
+  display: inline-block;
 }
-a.btn:hover {
+a.btn:hover, button:hover {
   background-color: $colPd;
 }
+button:disabled {
+  background-color: $colPvl;
+}
 .alignCenter {
-  display: inline-block;
+  display: block;
   margin: 0 auto;
+}
+.msg {
+  padding: $pad ($pad * 2);
+  margin: $pad;
+  text-align:center;
+  color: $colEd;
+  background-color: $colEl;
+  border: 1px solid $colError;
+}
+.light {
+  background-color: rgba(255,255,255,0.5);
+  padding: $pad ($pad * 2);
+  overflow: auto;
 }
 
 /* Navigation --------------------------------------------------------------- */
@@ -58,10 +88,35 @@ nav {
   }
 }
 
-/* Homepage ----------------------------------------------------------------- */
+/* Home Page ---------------------------------------------------------------- */
 .homePage {
   text-align:center;
-  background: url("/src/images/pizza.jpeg") no-repeat center center fixed;
+  background: url("/images/pizza.jpeg") no-repeat center center fixed;
+  padding: $pad;
+  .light {
+    margin-top: 20vh;
+  }
+  h1 {
+    font-size: $pad * 3;
+  }
+}
+
+/* Order Page --------------------------------------------------------------- */
+.orderPage {
+  form {
+    display: flex;
+    flex-direction: column;
+    max-width: 500px;
+    width: 100%;
+    align-items: stretch;
+    background-color: $colPl;
+    padding: $pad;
+  }
+  input {
+    flex: 1 1 auto;
+    padding: $pad;
+    margin: ($pad*0.5) 0px;
+  }
 }
 
 /* Footer ------------------------------------------------------------------- */
