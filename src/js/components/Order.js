@@ -4,8 +4,9 @@ var data = require('../data');
 
 var Order = React.createClass({
   getInitialState: function() {
-    // get initial enpty state of retrive from data storage object
+    // get initial enpty state or retrive from data storage object
     var info = data.getData('info') || {};
+    console.log(info);
     return {
       customer: {
         name: info.name || '',
@@ -47,7 +48,6 @@ var Order = React.createClass({
     } else {
       this.setState({isDisabled: true});
     }
-        console.log(checked);
   },
   render: function() {
     return (
