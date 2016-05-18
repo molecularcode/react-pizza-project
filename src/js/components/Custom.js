@@ -5,7 +5,7 @@ var Link = require('react-router').Link;
 var Custom = React.createClass({
   render: function() {
     return (
-      <div>
+      <div className="main custonPage">
         <h1 className="pageTitle">Custom Page!</h1>
         <p>Welcome to the Custom page!</p>
       </div>

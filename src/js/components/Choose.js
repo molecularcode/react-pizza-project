@@ -5,6 +5,44 @@ var data = require('../data');
 // require react component for checkbox groups
 var CheckboxGroup = require('react-checkbox-group');
 
+var pizzaOptions = [{
+  pizzaName: 'cheese',
+  pizzaImg: '../images/cheese.jpg',
+  pizzaPrice: 17.99
+}, {
+  pizzaName: 'pepperoni',
+  pizzaImg: '../images/pepperoni.jpg',
+  pizzaPrice: 18.99
+}, {
+  pizzaName: 'hawaiian',
+  pizzaImg: '../images/hawaiian.jpg',
+  pizzaPrice: 18.99
+}, {
+  pizzaName: 'allDressed',
+  pizzaImg: '../images/allDressed.jpg',
+  pizzaPrice: 19.99
+}, {
+  pizzaName: 'quebecoise',
+  pizzaImg: '../images/quebecoise.jpg',
+  pizzaPrice: 19.99
+}, {
+  pizzaName: 'vegetarian',
+  pizzaImg: '../images/vegetarian.jpg',
+  pizzaPrice: 19.99
+}, {
+  pizzaName: 'mexican',
+  pizzaImg: '../images/mexican.jpg',
+  pizzaPrice: 19.99
+}, {
+  pizzaName: 'meatLovers',
+  pizzaImg: '../images/meatLovers.jpg',
+  pizzaPrice: 20.99
+}, {
+  pizzaName: 'phillysteak',
+  pizzaImg: '../images/phillysteak.jpg',
+  pizzaPrice: 20.99
+}];
+
 var Choose = React.createClass({
   getInitialState: function() {
     return {
@@ -20,14 +58,13 @@ var Choose = React.createClass({
   //     });
   //   }.bind(this), 5000);
   // },
+
   render: function() {
-    console.log(this.state);
     // the checkboxes can be arbitrarily deep. They will always be fetched and
     // attached the `name` attribute correctly. `value` is optional
     return (
-      <div>
-        <h1 className="pageTitle">Choose Page!</h1>
-        <p>Welcome to the Choose page!</p>
+      <div className="main choosePage">
+        <h1 className="pageTitle">Please choose from our selection of 16" pizzas</h1>
         <CheckboxGroup
           name="pizzas"
           value={this.state.pizzas}
@@ -35,37 +72,17 @@ var Choose = React.createClass({
         >
           {
             Checkbox => (
-              <form>
-                <label>
-                  <Checkbox value="cheese"/> Cheese
-                </label>
-                <label>
-                  <Checkbox value="pepperoni"/> Pepperoni
-                </label>
-                <label>
-                  <Checkbox value="allDressed"/> All Dressed
-                </label>
-                <label>
-                  <Checkbox value="hawaiian"/> Québecoise
-                </label>
-                <label>
-                  <Checkbox value="hawaiian"/> Hawaiian Pizza
-                </label>
-                <label>
-                  <Checkbox value="hawaiian"/> Hawaiian Pizza
-                </label>
-                <label>
-                  <Checkbox value="hawaiian"/> Hawaiian Pizza
-                </label>
-                <label>
-                  <Checkbox value="hawaiian"/> Hawaiian Pizza
-                </label>
-                <label>
-                  <Checkbox value="hawaiian"/> Hawaiian Pizza
-                </label>
-                <label>
-                  <Checkbox value="hawaiian"/> Hawaiian Pizza
-                </label>
+              <form className="pizzas">
+                {pizzaOptions.map(function(pizza) {
+                  return (
+                  <div className="pizza" key={pizza.pizzaName}>
+                  <img src={pizza.pizzaImg} />
+                    <label>
+                      <Checkbox value={pizza.pizzaName}/> <b className="capitalize">{pizza.pizzaName.split(/(?=[A-Z])/).join(" ")}</b> ${pizza.pizzaPrice}
+                    </label>
+                  </div>
+                  );
+                })}
               </form>
             )
           }

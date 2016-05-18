@@ -5,7 +5,7 @@ var Link = require('react-router').Link;
 var Home = React.createClass({
   render: function() {
     return (
-      <div className="homePage">
+      <div className="main homePage">
         <div className="light">
           <h1 className="pageTitle">Welcome to Reactive Pizza</h1>
           <Link to="/order" className="btn">Order</Link>

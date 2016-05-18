@@ -11,18 +11,22 @@ $colEl: lighten( $colError, 20% );
 @import 'reset';
 
 /* Global --------------------------------------------------------------- */
-body {
+html, body {
   color: $colText;
+  height: 100%;
 }
 header, footer {
   padding: $pad;
 }
-main, .homePage {
-  height: calc(100vh - 190px);
-}
 header {
   background: url("/images/logo.png") left center no-repeat, $colPrimary;
   background-size: contain;
+}
+main, .main {
+  min-height: calc(100vh - 190px);
+}
+.main {
+  padding: $pad;
 }
 footer {
   background-color: $colPrimary;
@@ -50,6 +54,9 @@ a.btn:hover, button:hover {
 button:disabled {
   background-color: $colPvl;
 }
+.img {
+  max-width: 100%;
+}
 .alignCenter {
   display: block;
   margin: 0 auto;
@@ -66,6 +73,9 @@ button:disabled {
   background-color: rgba(255,255,255,0.5);
   padding: $pad ($pad * 2);
   overflow: auto;
+}
+.capitalize {
+  text-transform: capitalize;
 }
 
 /* Navigation --------------------------------------------------------------- */
@@ -116,6 +126,37 @@ nav {
     flex: 1 1 auto;
     padding: $pad;
     margin: ($pad*0.5) 0px;
+  }
+}
+
+/* Choose Page -------------------------------------------------------------- */
+.pizzas {
+  display: flex;
+  align-items: stretch;
+  flex-wrap: wrap;
+}
+.pizza {
+  flex: 1 1 auto;
+  margin: $pad * 0.5;
+  justify-content: center;
+  text-align:center;
+  img {
+    display: block;
+    margin: 0px auto;
+    padding: 0px;
+  }
+  label {
+    margin: $pad 0px ($pad * 1.5);
+    display: inline-block;
+  }
+  input[type=checkbox] {
+    /* Double-sized Checkboxes */
+    -ms-transform: scale(2); /* IE */
+    -moz-transform: scale(2); /* FF */
+    -webkit-transform: scale(2); /* Safari and Chrome */
+    -o-transform: scale(2); /* Opera */
+    padding: 10px;
+    margin-right: $pad * 0.5;
   }
 }
 

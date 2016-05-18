@@ -5,7 +5,7 @@ var Link = require('react-router').Link;
 var NotFound = React.createClass({
   render: function() {
     return (
-      <div>Not Found!</div>
+      <div className="main notFoundPage">Not Found!</div>
     );
   }
 });

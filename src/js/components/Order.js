@@ -51,7 +51,7 @@ var Order = React.createClass({
   },
   render: function() {
     return (
-      <div className="orderPage">
+      <div className="main orderPage">
         <h1 className="pageTitle">Please enter your contact details</h1>
         <form className="alignCenter" method="post">
           <input type="text" name="name" placeholder="name" value={this.state.name} onChange={this.onChange.bind(this, 'name')}/>
