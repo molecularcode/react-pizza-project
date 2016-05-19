@@ -17,9 +17,6 @@ For example, if the client requests http://server/step-2 the server will send th
 */
 
 app.get('/pizzas', function(req, res) {
-  
-  console.log(req);
-  
     res.json([{
       pizzaName: 'customToppings',
       pizzaImg: '../images/customToppings.jpg'

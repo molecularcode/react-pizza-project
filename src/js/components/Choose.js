@@ -81,11 +81,12 @@ var Choose = React.createClass({
   },
   pizzasChanged: function(newPizzas) {
     var result = newPizzas.filter(function( obj ) {
-      return obj.pizzaName === 'Choose toppings';
+      return obj.pizzaName === 'customToppings';
     });
-    if (result) {
+    console.log(result);
+    if (result.length > 0) {
       this.setState({
-        buttonText: 'Choose toppings'
+        buttonText: 'Choose your toppings'
       });
     }
     this.setState({
