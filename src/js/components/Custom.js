@@ -4,6 +4,8 @@ var React = require('react');
 var data = require('../data');
 // react component for checkbox groups
 var CheckboxGroup = require('react-checkbox-group');
+// pass events to be used universally
+var event = require('../events');
 
 var toppingToppings = [{
   toppingName: 'mozzarella',
@@ -63,17 +65,14 @@ var Custom = React.createClass({
   getInitialState: function() {
     var info = data.getData('info') || {};
     return {
-      toppings: [{
-        toppingName: info.toppingName || '',
-        toppingPrice: info.toppingPrice || ''
-      }],
+      toppings: [],
       totalPrice: 0
     };
   },
   continueOrder: function() {
     data.setData('info', this.state);
     // this way of programmatically navigating is deprecated. it still works in the current react-router version but will become unavailable soon
-      this.props.history.push('/done');
+    this.props.history.push('/done');
   },
   render: function() {
     // the checkboxes can be arbitrarily deep. They will always be fetched and
@@ -84,7 +83,7 @@ var Custom = React.createClass({
         <p className="alignCenter">the base price is $10, plus your chosen toppings</p>
         <CheckboxGroup
           name="toppings"
-          value={this.state.topping}
+          value={this.state.toppings}
           onChange={this.toppingsChanged}
         >
           {
@@ -100,6 +99,7 @@ var Custom = React.createClass({
                   </div>
                   );
                 })}
+                {this.state.tooMany ? <p>You can select a maximum of 4 toppings</p> : null}
                 <button onClick={this.continueOrder} type="button">Complete order</button><span className="totalPrice">Order total = ${(10+this.state.totalPrice).toFixed(2)}</span>
               </form>
             )
@@ -109,18 +109,25 @@ var Custom = React.createClass({
     );
   },
   toppingsChanged: function(newToppings) {
+    // topping prices and total
     var toppingPrices = [];
     var totalPrice = newToppings.map(function(obj) {
       toppingPrices.push(obj.toppingPrice);
       return toppingPrices;
     });
-    var sumPrices = toppingPrices.reduce(function(pv, cv) { 
-      return pv + cv;
+    var sumPrices = toppingPrices.reduce(function(pp, cp) { 
+      return pp + cp;
     }, 0);
-    this.setState({
-      totalPrice: sumPrices,
-      toppings: newToppings
-    });
+    // disable checkboxes and display msg if user trys to select more than 4 toppings
+    if (newToppings.length <= 4 ) {
+      this.setState({
+        totalPrice: sumPrices,
+        toppings: newToppings
+      });
+    }
+    else {
+      event.emit('show_message', {message:"You may select a maximum of 4 toppings", duration: 2000});
+    }
   }
 });
 

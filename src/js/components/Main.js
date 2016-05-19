@@ -1,5 +1,6 @@
 var React = require('react');
 var Link = require('react-router').Link;
+var Message = require('./Message');
 
 // The main application layout
 // this.props.children will be set by React Router depending on the current route
@@ -8,6 +9,7 @@ var App = React.createClass({
     return (
         <div>
         <header>
+          <Message/>
             <nav className="main-menu">
                 <ul>
                   <li>

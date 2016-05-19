@@ -54,7 +54,8 @@ var Choose = React.createClass({
         pizzaName: info.pizzaName || '',
         pizzaPrice: info.pizzaPrice || ''
         }],
-      buttonText: 'Complete order'
+      buttonText: 'Complete order',
+      isDisabled: true
     };
   },
   continueOrder: function() {

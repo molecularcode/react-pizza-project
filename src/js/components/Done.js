@@ -1,16 +1,19 @@
 var React = require('react');
-var Link = require('react-router').Link;
 
 var Done = React.createClass({
   render: function() {
     
     return(
       <div className="main donePage">
-      <h1 className="pageTitle">Done Page!</h1>
-      <p>Welcome to the Done page!</p>
-    </div>
-      )
-    
+        <h1 className="pageTitle">Confirmation</h1>
+        <div className="info">
+          <h3>Your Information</h3>
+        </div>
+        <div className="order">
+          <h3>Your Order</h3>
+        </div>
+      </div>
+    );
   }
 });
 

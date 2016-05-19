@@ -9,6 +9,7 @@ $colEd: darken( $colError, 20% );
 $colEl: lighten( $colError, 20% );
 
 @import 'reset';
+@import 'message';
 
 /* Global --------------------------------------------------------------- */
 html, body {
@@ -142,11 +143,11 @@ nav {
     align-self: flex-end;
     position: absolute;
     left: 15px;
-    bottom: 10px;
+    bottom: $pad * 2;
   }
   .totalPrice {
     left: 200px;
-    bottom: 25px;
+    bottom: 45px;
   }
 }
 .pizza, .topping {
@@ -202,6 +203,17 @@ nav {
   input, b, span {
     flex: 1 1 auto;
   }
+}
+
+/* Done Page ---------------------------------------------------------------- */
+.donePage {
+  
+}
+.info {
+  
+}
+.order {
+  
 }
 
 /* Footer ------------------------------------------------------------------- */
