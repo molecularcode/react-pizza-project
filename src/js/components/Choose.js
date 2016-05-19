@@ -60,7 +60,7 @@ var Choose = React.createClass({
   continueOrder: function() {
     data.setData('info', this.state);
     // this way of programmatically navigating is deprecated. it still works in the current react-router version but will become unavailable soon
-    var result = this.state.pizzas.filter(function( obj ) {
+    var result = this.state.pizzas.filter(function(obj) {
       return obj.pizzaName === 'Choose toppings';
     });
     if (this.state.pizzas.length !== 0 && result) {

@@ -21,10 +21,11 @@ var NotFound = require('./components/404.js');
 /*
 The routes. This section says:
   - If the route starts with /, load the App component
-  - If the route IS /, load the Home component INSIDE App as this.props.children
-  - If the route is /about, load the About component INSIDE App as this.props.children
-  - If the route is /team, load the Team component INSIDE App as this.props.children
-  - If the route is /about, load the About component INSIDE App as this.props.children
+  - If the route is /, load the Home component INSIDE App as this.props.children
+  - If the route is /order, load the Order component INSIDE App as this.props.children
+  - If the route is /choose, load the Choose component INSIDE App as this.props.children
+  - If the route is /custom, load the Custom component INSIDE App as this.props.children
+  - If the route is /done, load the Done component INSIDE App as this.props.children
   - If the route is anything else, load the NotFound component INSIDE App as this.props.children
 
 The whole process lets us create **complex, nested user interfaces** with minimal effort,

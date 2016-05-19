@@ -27,6 +27,7 @@ main, .main {
 }
 .main {
   padding: $pad;
+  position: relative;
 }
 footer {
   background-color: $colPrimary;
@@ -60,6 +61,7 @@ button:disabled {
 .alignCenter {
   display: block;
   margin: 0 auto;
+  text-align:center;
 }
 .msg {
   padding: $pad ($pad * 2);
@@ -130,12 +132,24 @@ nav {
 }
 
 /* Choose Page -------------------------------------------------------------- */
-.pizzas {
+.pizzas, .toppings {
   display: flex;
   align-items: stretch;
   flex-wrap: wrap;
+  button, .totalPrice {
+    display: block;
+    flex: 0 0 200px;
+    align-self: flex-end;
+    position: absolute;
+    left: 15px;
+    bottom: 10px;
+  }
+  .totalPrice {
+    left: 200px;
+    bottom: 25px;
+  }
 }
-.pizza {
+.pizza, .topping {
   flex: 1 1 auto;
   margin: $pad * 0.5;
   justify-content: center;
@@ -157,6 +171,36 @@ nav {
     -o-transform: scale(2); /* Opera */
     padding: 10px;
     margin-right: $pad * 0.5;
+  }
+}
+
+/* Custom Page -------------------------------------------------------------- */
+.toppings {
+  padding: ($pad * 2) 0px ($pad * 4);
+}
+.topping {
+  display: flex;
+  align-items: stretch;
+  justify-content: flex-start;
+  flex: 1 1;
+  img {
+    display: inline-block;
+    margin: 0px 15px 0px 0px;
+  }
+  img, label {
+    text-align:center;
+  }
+  label {
+    display: flex;
+    flex-direction:column;
+    justify-content: center;
+    width: $pad * 5;
+    input[type=checkbox] {
+      margin: 0 auto ($pad*0.5);
+    }
+  }
+  input, b, span {
+    flex: 1 1 auto;
   }
 }
 
