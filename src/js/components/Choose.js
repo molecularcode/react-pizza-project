@@ -4,59 +4,32 @@ var React = require('react');
 var data = require('../data');
 // react component for checkbox groups
 var CheckboxGroup = require('react-checkbox-group');
-
-var pizzaOptions = [{
-  pizzaName: 'customToppings',
-  pizzaImg: '../images/customToppings.jpg'
-}, {
-  pizzaName: 'cheese',
-  pizzaImg: '../images/cheese.jpg',
-  pizzaPrice: 17.99
-}, {
-  pizzaName: 'pepperoni',
-  pizzaImg: '../images/pepperoni.jpg',
-  pizzaPrice: 18.99
-}, {
-  pizzaName: 'hawaiian',
-  pizzaImg: '../images/hawaiian.jpg',
-  pizzaPrice: 18.99
-}, {
-  pizzaName: 'allDressed',
-  pizzaImg: '../images/allDressed.jpg',
-  pizzaPrice: 19.99
-}, {
-  pizzaName: 'quebecoise',
-  pizzaImg: '../images/quebecoise.jpg',
-  pizzaPrice: 19.99
-}, {
-  pizzaName: 'vegetarian',
-  pizzaImg: '../images/vegetarian.jpg',
-  pizzaPrice: 19.99
-}, {
-  pizzaName: 'mexican',
-  pizzaImg: '../images/mexican.jpg',
-  pizzaPrice: 19.99
-}, {
-  pizzaName: 'meatLovers',
-  pizzaImg: '../images/meatLovers.jpg',
-  pizzaPrice: 20.99
-}, {
-  pizzaName: 'phillysteak',
-  pizzaImg: '../images/phillysteak.jpg',
-  pizzaPrice: 20.99
-}];
+// enable ajax to request data from our server
+var request = require('superagent');
 
 var Choose = React.createClass({
   getInitialState: function() {
-    var info = data.getData('info') || {};
     return {
-      pizzas: [{
-        pizzaName: info.pizzaName || '',
-        pizzaPrice: info.pizzaPrice || ''
-        }],
-      buttonText: 'Complete order',
-      isDisabled: true
+      pizzas: [],
+      pizzaChoice: [],
+      buttonText: 'Complete order'
     };
+  },
+  componentDidMount: function() {
+    var that = this;
+    this.setState({
+      loading: true
+    });
+    request
+    .get('/pizzas')
+    .end(function(err, result) {
+      if(result){
+        that.setState({
+          pizzas: result.body,
+          loading: false
+        });
+      }
+    });
   },
   continueOrder: function() {
     data.setData('info', this.state);
@@ -77,34 +50,36 @@ var Choose = React.createClass({
     return (
       <div className="main choosePage">
         <h1 className="pageTitle">Please choose from our selection of 16" pizzas</h1>
-        <CheckboxGroup
-          name="pizzas"
-          value={this.state.pizza}
-          onChange={this.pizzasChanged}
-        >
-          {
-            Checkbox => (
-              <form className="pizzas">
-                {pizzaOptions.map(function(pizza) {
-                  return (
+        {this.state.loading ? <p>Please wait while the pizzas load... they`re worth waiting for...</p> : null}
+        
+         <CheckboxGroup
+        name="pizzas"
+        value={this.state.pizzaChoice}
+        onChange={this.pizzasChanged}
+      >
+        {
+          Checkbox => (
+            <form className="pizzas">
+              {this.state.pizzas.map(function(pizza){
+                return (
                   <div className="pizza" key={pizza.pizzaName}>
-                  <img src={pizza.pizzaImg} />
+                    <img src={pizza.pizzaImg} />
                     <label>
                       <Checkbox value={pizza}/> <b className="capitalize">{pizza.pizzaName.split(/(?=[A-Z])/).join(" ")}</b> ${pizza.pizzaPrice}
                     </label>
                   </div>
-                  );
-                })}
-                <button onClick={this.continueOrder} type="button">{this.state.buttonText}</button>
-              </form>
-            )
-          }
-        </CheckboxGroup>
+                );
+              })}
+              <button onClick={this.continueOrder} type="button">{this.state.buttonText}</button>
+            </form>
+          )
+        }
+      </CheckboxGroup>
+        
       </div>
     );
   },
   pizzasChanged: function(newPizzas) {
-    console.log(data.getData('info'));
     var result = newPizzas.filter(function( obj ) {
       return obj.pizzaName === 'Choose toppings';
     });
@@ -114,7 +89,7 @@ var Choose = React.createClass({
       });
     }
     this.setState({
-      pizzas: newPizzas
+      pizzaChoice: newPizzas
     });
   }
 });

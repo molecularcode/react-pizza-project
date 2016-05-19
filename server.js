@@ -15,6 +15,52 @@ app.use(express.static(__dirname + '/src'));
 This says: for any path NOT served by the middleware above, send the file called index.html instead.
 For example, if the client requests http://server/step-2 the server will send the file index.html. Then on the browser, React Router will load the appropriate component
 */
+
+app.get('/pizzas', function(req, res) {
+  
+  console.log(req);
+  
+    res.json([{
+      pizzaName: 'customToppings',
+      pizzaImg: '../images/customToppings.jpg'
+    }, {
+      pizzaName: 'cheese',
+      pizzaImg: '../images/cheese.jpg',
+      pizzaPrice: 17.99
+    }, {
+      pizzaName: 'pepperoni',
+      pizzaImg: '../images/pepperoni.jpg',
+      pizzaPrice: 18.99
+    }, {
+      pizzaName: 'hawaiian',
+      pizzaImg: '../images/hawaiian.jpg',
+      pizzaPrice: 18.99
+    }, {
+      pizzaName: 'allDressed',
+      pizzaImg: '../images/allDressed.jpg',
+      pizzaPrice: 19.99
+    }, {
+      pizzaName: 'quebecoise',
+      pizzaImg: '../images/quebecoise.jpg',
+      pizzaPrice: 19.99
+    }, {
+      pizzaName: 'vegetarian',
+      pizzaImg: '../images/vegetarian.jpg',
+      pizzaPrice: 19.99
+    }, {
+      pizzaName: 'mexican',
+      pizzaImg: '../images/mexican.jpg',
+      pizzaPrice: 19.99
+    }, {
+      pizzaName: 'meatLovers',
+      pizzaImg: '../images/meatLovers.jpg',
+      pizzaPrice: 20.99
+    }, {
+      pizzaName: 'phillysteak',
+      pizzaImg: '../images/phillysteak.jpg',
+      pizzaPrice: 20.99
+    }]);
+});
 app.get('/*', function(request, response) {
   response.sendFile(__dirname + '/src/index.html');
 });
