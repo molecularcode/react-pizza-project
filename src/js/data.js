@@ -2,7 +2,11 @@
 var data = {};
 
 function getData(key) {
-  return data[key];
+  if(key){
+    return data[key]
+  } else {
+    return data
+  }
 }
 
 function setData(key, value) {

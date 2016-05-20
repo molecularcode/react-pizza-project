@@ -22,9 +22,10 @@ header, footer {
 header {
   background: url("/images/logo.png") left center no-repeat, $colPrimary;
   background-size: contain;
+  min-height: $pad*4;
 }
 main, .main {
-  min-height: calc(100vh - 190px);
+  min-height: calc(100vh - 200px);
 }
 .main {
   padding: $pad;
@@ -59,10 +60,26 @@ button:disabled {
 .img {
   max-width: 100%;
 }
+ul {
+  list-style-type: none;
+  margin: 0px;
+  padding: 0px;
+}
+dt {
+  font-weight: 800;
+}
 .alignCenter {
   display: block;
   margin: 0 auto;
   text-align:center;
+}
+.clear {
+  flex: 1 1 100%;
+  text-align: center;
+  padding: ($pad * 2) 0px $pad;
+  button {
+    margin-right: $pad;
+  }
 }
 .msg {
   padding: $pad ($pad * 2);
@@ -84,7 +101,8 @@ button:disabled {
 /* Navigation --------------------------------------------------------------- */
 nav {
   ul {
-    text-align: center;
+    text-align: right;
+    padding-top: 5px;
   }
   li {
     display: inline-block;
@@ -104,6 +122,8 @@ nav {
 /* Home Page ---------------------------------------------------------------- */
 .homePage {
   text-align:center;
+}
+.homePage, .donePage {
   background: url("/images/pizza.jpeg") no-repeat center center fixed;
   padding: $pad;
   .light {
@@ -137,23 +157,17 @@ nav {
   display: flex;
   align-items: stretch;
   flex-wrap: wrap;
-  button, .totalPrice {
-    display: block;
-    flex: 0 0 200px;
-    align-self: flex-end;
-    position: absolute;
-    left: 15px;
-    bottom: $pad * 2;
-  }
-  .totalPrice {
-    left: 200px;
-    bottom: 45px;
-  }
+}
+.pizzas {
+  justify-content: center;
+}
+.pizza {
+  flex-grow: 1;
+  justify-content: center;
+  max-width: 300px;
 }
 .pizza, .topping {
-  flex: 1 1 auto;
   margin: $pad * 0.5;
-  justify-content: center;
   text-align:center;
   img {
     display: block;
@@ -161,7 +175,7 @@ nav {
     padding: 0px;
   }
   label {
-    margin: $pad 0px ($pad * 1.5);
+    margin: $pad 0px ($pad * 0.5);
     display: inline-block;
   }
   input[type=checkbox] {
@@ -173,6 +187,9 @@ nav {
     padding: 10px;
     margin-right: $pad * 0.5;
   }
+  p {
+    margin-top: 0px;
+  }
 }
 
 /* Custom Page -------------------------------------------------------------- */
@@ -183,7 +200,6 @@ nav {
   display: flex;
   align-items: stretch;
   justify-content: flex-start;
-  flex: 1 1;
   img {
     display: inline-block;
     margin: 0px 15px 0px 0px;
@@ -206,25 +222,36 @@ nav {
 }
 
 /* Done Page ---------------------------------------------------------------- */
+.donePage {
+  h1 {
+    color: #fff;
+  }
+}
 .donePage .container {
   display: flex;
   align-items: stretch;
   max-width: 700px;
   margin: 0 auto;
-  border: 1px solid $colPrimary;
   h3 {
     text-align: center;
   }
 }
 .info {
-  flex-grow:1;
   background-color: $colPl;
 }
 .order {
-  flex-grow: 2;
+  background-color: #fff;
 }
 .info, .order {
+  flex: 1 1 50%;
   padding: $pad;
+}
+.totalPrice {
+  font-weight: 800;
+  text-align:right;
+  border-top: 1px solid $colText;
+  border-bottom: 1px solid $colText;
+  padding: ($pad * 0.5) 0px;
 }
 
 /* Footer ------------------------------------------------------------------- */

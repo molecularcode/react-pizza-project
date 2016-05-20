@@ -13,9 +13,9 @@ var App = React.createClass({
             <nav className="main-menu">
                 <ul>
                   <li>
-                    <Link to="/">Home</Link>
+                    <Link to="/">Start a new order</Link>
                   </li>
-                  <li>
+                  {/*<li>
                     <Link to="/order">Order</Link>
                   </li>
                   <li>
@@ -26,7 +26,7 @@ var App = React.createClass({
                   </li>
                   <li>
                     <Link to="/done">Done</Link>
-                  </li>
+                  </li>*/}
                 </ul>
               </nav>
         </header>
