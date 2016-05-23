@@ -1,5 +1,4 @@
 var React = require('react');
-//var Link = require('react-router').Link;
 // data storage module
 var data = require('../data');
 // react component for checkbox groups
@@ -11,7 +10,7 @@ var Choose = React.createClass({
   getInitialState: function() {
     return {
       pizzas: [],
-      pizzaChoice: [],
+      pizzaChoice: (data.getData('pizzas') || []).map(pizz => pizz.pizzaName),
       buttonText: 'Complete order'
     };
   },
@@ -32,13 +31,9 @@ var Choose = React.createClass({
     });
   },
   continueOrder: function() {
-    data.setData('pizzas', this.state.pizzaChoice);
+    data.setData('pizzas', this.state.pizzaChoice.map(choice => this.state.pizzas.find(pizz => pizz.pizzaName === choice)));
     // this way of programmatically navigating is deprecated. it still works in the current react-router version but will become unavailable soon
-    var result = this.state.pizzaChoice.filter(function(obj) {
-      return obj.pizzaName === 'customToppings';
-    });
-    console.log(result, 'result');
-    if (this.state.pizzaChoice.length !== 0 && result.length > 0) {
+    if (this.state.pizzaChoice.indexOf('customToppings') > -1) {
       this.props.history.push('/custom');
     }
     else {
@@ -46,7 +41,6 @@ var Choose = React.createClass({
     }
   },
   render: function() {
-    console.log(data.getData());
     // the checkboxes can be arbitrarily deep. They will always be fetched and
     // the `name` attribute attached correctly. `value` is optional
     return (
@@ -66,7 +60,7 @@ var Choose = React.createClass({
                     <div className="pizza" key={pizza.pizzaName}>
                       <img src={pizza.pizzaImg} />
                       <label>
-                        <Checkbox value={pizza}/> <b className="capitalize">{pizza.pizzaName.split(/(?=[A-Z])/).join(" ")}</b> ${pizza.pizzaPrice}
+                        <Checkbox value={pizza.pizzaName}/> <b className="capitalize">{pizza.pizzaName.split(/(?=[A-Z])/).join(" ")}</b> ${pizza.pizzaPrice}
                       </label>
                       <p>{pizza.pizzaToppings}</p>
                     </div>

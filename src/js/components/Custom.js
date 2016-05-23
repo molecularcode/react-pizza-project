@@ -1,5 +1,4 @@
 var React = require('react');
-//var Link = require('react-router').Link;
 // data storage module
 var data = require('../data');
 // react component for checkbox groups
@@ -13,7 +12,7 @@ var Custom = React.createClass({
   getInitialState: function() {
     return {
       toppings: [],
-      toppingChoice: [],
+      toppingChoice: (data.getData('toppings') || []).map(top => top.toppingName),
       totalPrice: 0
     };
   },
@@ -34,7 +33,7 @@ var Custom = React.createClass({
     });
   },
   continueOrder: function() {
-    data.setData('toppings', this.state.toppingChoice);
+    data.setData('toppings', this.state.toppingChoice.map(choice => this.state.pizzas.find(top => top.toppingName === choice)));
     // this way of programmatically navigating is deprecated. it still works in the current react-router version but will become unavailable soon
     this.props.history.push('/done');
   },
@@ -60,7 +59,7 @@ var Custom = React.createClass({
                   <div className="topping" key={topping.toppingName}>
                   <img src={topping.toppingImg} />
                     <label>
-                      <Checkbox value={topping}/> <b className="capitalize">{topping.toppingName.split(/(?=[A-Z])/).join(" ")}</b> <span className="price">${topping.toppingPrice.toFixed(2)}</span>
+                      <Checkbox value={topping.toppingName}/> <b className="capitalize">{topping.toppingName.split(/(?=[A-Z])/).join(" ")}</b> <span className="price">${topping.toppingPrice.toFixed(2)}</span>
                     </label>
                   </div>
                   );
@@ -76,10 +75,15 @@ var Custom = React.createClass({
   toppingsChanged: function(newToppings) {
     // topping prices and total
     var toppingPrices = [];
-    var totalPrice = newToppings.map(function(obj) {
+    var toppingObjs = [this.state.toppingChoice.map(choice => this.state.toppings.find(top => top.toppingName === choice))];
+    console.log(toppingObjs, 'toppingObjs')
+    toppingObjs.map(function(obj) {
+      console.log(obj.toppingPrice, 'obj.toppingPrice')
       toppingPrices.push(obj.toppingPrice);
+       console.log(obj.toppingPrice, 'obj.toppingPrice')
       return toppingPrices;
     });
+    console.log(toppingPrices, 'toppingPrices')
     var sumPrices = toppingPrices.reduce(function(pp, cp) { 
       return pp + cp;
     }, 0);

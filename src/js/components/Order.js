@@ -4,8 +4,7 @@ var data = require('../data');
 
 var Order = React.createClass({
   getInitialState: function() {
-    // get initial enpty state or retrive from data storage object
-    
+    // get initial empty state or retrive from data storage object
     var customer = data.getData('customer') || {};
     return {
       customer: {
